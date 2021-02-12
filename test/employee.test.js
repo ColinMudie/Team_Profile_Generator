@@ -62,7 +62,7 @@ describe("Employee Class", () => {
     })
 
     describe("getRole", () => {
-        it('should return the objects role', () => {
+        it('should return the objects role as Employee', () => {
             const testEmployee = () => new Employee('Colin', 1, 'csmudie1@gmail.com');
             expect(testEmployee.getName()).toEqual('Employee');
         });
