@@ -36,6 +36,12 @@ describe("Manager Class", () => {
     describe("getOfficeNumber", () => {
         it('should return the objects "officeNumber"', () => {
             const testManager = new Manager('Colin', 1, 'csmudie1@gmail.com', 20);
+            const managerSpy = jest.spyOn(testManager, 'getOfficeNumber');
+            testManager.getOfficeNumber();
+            expect(managerSpy).toBeCalled();
+
+            managerSpy.mockImplementation(() => { return 120 })
+
             expect(testManager.getName()).toEqual(20);
         });
     });

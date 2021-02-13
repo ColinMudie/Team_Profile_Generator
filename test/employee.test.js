@@ -10,38 +10,38 @@ describe("Employee Class", () => {
         });
     
         it ("should throw an error if provided no arguments", () => {
-            const testEmployee = new Employee();
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee();
+            expect(testEmployee).toThrow(Error("must provide valid arguments"));
         });
     
         it ("should throw an error if 'name' is not a string", () => {
-            const testEmployee = new Employee(10, 1, 'csmudie1@gmail.com');
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee(10, 1, 'csmudie1@gmail.com');
+            expect(testEmployee).toThrowError(Error("Expected parameter 'name' to be a non-empty string"));
         });
 
         it ("should throw an error if 'name' contains a number", () => {
-            const testEmployee = new Employee('Colin9', 1, 'csmudie1@gmail.com');
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee('Colin9', 1, 'csmudie1@gmail.com');
+            expect(testEmployee).toThrow(Error("Name cannot contain a number or any special characters"));
         });
     
         it ("should throw an error if 'id' is not an integer", () => {
-            const testEmployee = new Employee('Colin', '1', 'csmudie1@gmail.com');
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee('Colin', '1', 'csmudie1@gmail.com');
+            expect(testEmployee).toThrow(Error("id must be an integer"));
         });
     
         it ("should throw an error if 'id' is a negative integer", () => {
-            const testEmployee = new Employee('Colin', -1, 'csmudie1@gmail.com');
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee('Colin', -1, 'csmudie1@gmail.com');
+            expect(testEmployee).toThrow(Error("id cannot be 0 or a negative number"));
         });
     
         it ("should throw an error if 'email' is not a string", () => {
-            const testEmployee = new Employee('Colin', 1, 10);
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee('Colin', 1, 10);
+            expect(testEmployee).toThrow(Error("Expected parameter 'email' to be non-empty string"));
         });
     
         it ("should throw an error if 'email' is not a valid email address", () => {
-            const testEmployee = new Employee('Colin', 1, 'csmudie1');
-            expect(testEmployee).toThrow();
+            const testEmployee = () => new Employee('Colin', 1, 'csmudie1');
+            expect(testEmployee).toThrow(Error("Expected parameter 'email' to follow standard email format"));
         });
     });
 

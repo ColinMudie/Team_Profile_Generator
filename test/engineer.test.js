@@ -17,12 +17,12 @@ describe("Engineer Class", () => {
 
         it ("should throw an error if 'github' is not a string", () => {
             const testEngineer = new Engineer('Colin', 1, 'csmudie1@gmail.com', 0);
-            expect(testEngineer).toThrow();
+            expect(testEngineer).toThrow(Error);
         });
     });
 
     describe('getRole', () => {
-        it ('should return the objects role as Intern', () => {
+        it ('should return the objects role as Engineer', () => {
             const testEngineer = new Engineer('Colin', 1, 'csmudie1@gmail.com', 'ColinMudie');
             expect(testEngineer.getRole()).toEqual('Engineer');
         });

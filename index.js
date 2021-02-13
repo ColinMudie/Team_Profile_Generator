@@ -1,6 +1,8 @@
 const fs = require('fs')
 const inquirer = require('inquirer')
 
+//npm test -- --verbose
+
 //Classes
 const Employee = require('./lib/employee');
 const Manager = require('./lib/manager');
@@ -71,14 +73,14 @@ const questions = [
 function init(){
     inquirer.prompt(questions).then((data) => {
         if ((data.role).includes("Manager")){
-            managers.push(data)
-            
+            const newManager = new Manager(data.name, data.id, data.email, data.officeNumber)
+            managers.push(newManager)
         } else if ((data.role).includes("Engineer")){
-            engineers.push(data)
-            
+            const newEngineer = new Engineer(data.name, data.id, data.email, data.github)
+            engineers.push(newEngineer)
         } else if ((data.role).includes("Intern")){
-            interns.push(data)
-            
+            const newIntern = new Intern(data.name, data.id, data.email, data.school)
+            interns.push(newIntern)
         }
         if (data.continue === true){
             init();
