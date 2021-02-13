@@ -11,13 +11,13 @@ describe("Intern Class", () => {
         })
 
         it ("should throw an error if provided no arguments", () => {
-            const testIntern = new Intern();
-            expect(testIntern).toThrow();
+            const testIntern = () => new Intern();
+            expect(testIntern).toThrow(Error("must provide valid arguments"));
         });
 
         it ("should throw an error if 'school' is not a string", () => {
-            const testIntern = new Intern('Colin', 1, 'csmudie1@gmail.com', 0);
-            expect(testIntern).toThrow();
+            const testIntern = () => new Intern('Colin', 1, 'csmudie1@gmail.com', 0);
+            expect(testIntern).toThrow(Error('Expected parameter "school" to be a string'));
         });
     });
 
@@ -31,7 +31,7 @@ describe("Intern Class", () => {
     describe("getSchool", () => {
         it('should return the objects "school"', () => {
             const testIntern = new Intern('Colin', 1, 'csmudie1@gmail.com', 'CMU');
-            expect(testIntern.getName()).toEqual('CMU');
+            expect(testIntern.getSchool()).toEqual('CMU');
         });
     });
 });
