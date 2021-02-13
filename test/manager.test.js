@@ -11,18 +11,18 @@ describe("Manager Class", () => {
         })
 
         it ("should throw an error if provided no arguments", () => {
-            const testManager = new Manager();
-            expect(testManager).toThrow();
+            const testManager = () => new Manager();
+            expect(testManager).toThrow(Error("must provide valid arguments"));
         });
 
         it ("should throw an error if 'officeNumber' is not an Integer", () => {
-            const testManager = new Manager('Colin', 1, 'csmudie1@gmail.com', '20');
-            expect(testManager).toThrow();
+            const testManager = () => new Manager('Colin', 1, 'csmudie1@gmail.com', '20');
+            expect(testManager).toThrow(Error("officeNumber must be an integer"));
         });
 
         it ("should throw an error if 'officeNumber' is less than or equal to 0.", () => {
-            const testManager = new Manager('Colin', 1, 'csmudie1@gmail.com', -1);
-            expect(testManager).toThrow();
+            const testManager = () => new Manager('Colin', 1, 'csmudie1@gmail.com', -1);
+            expect(testManager).toThrow(Error("officeNumber cannot be less than or equal to 0"));
         });
     });
 
@@ -36,13 +36,13 @@ describe("Manager Class", () => {
     describe("getOfficeNumber", () => {
         it('should return the objects "officeNumber"', () => {
             const testManager = new Manager('Colin', 1, 'csmudie1@gmail.com', 20);
-            const managerSpy = jest.spyOn(testManager, 'getOfficeNumber');
-            testManager.getOfficeNumber();
-            expect(managerSpy).toBeCalled();
 
-            managerSpy.mockImplementation(() => { return 120 })
+            // const managerSpy = jest.spyOn(testManager, 'getOfficeNumber');
+            // testManager.getOfficeNumber();
+            // expect(managerSpy).toBeCalled();
+            // managerSpy.mockImplementation(() => { return 120 })
 
-            expect(testManager.getName()).toEqual(20);
+            expect(testManager.getOfficeNumber()).toEqual(20);
         });
     });
 });
