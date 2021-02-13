@@ -8,6 +8,7 @@ const Employee = require('./lib/employee');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const Intern = require('./lib/intern');
+const generateHtml = require('./scripts/generate-html')
 
 const managers = [];
 const engineers = [];
@@ -72,22 +73,26 @@ const questions = [
 
 function init(){
     inquirer.prompt(questions).then((data) => {
+        console.log(data);
         if ((data.role).includes("Manager")){
-            const newManager = new Manager(data.name, data.id, data.email, data.officeNumber)
+            const newManager = new Manager(data.name, parseInt(data.id), data.email, parseInt(data.officeNumber))
             managers.push(newManager)
         } else if ((data.role).includes("Engineer")){
-            const newEngineer = new Engineer(data.name, data.id, data.email, data.github)
+            const newEngineer = new Engineer(data.name, parseInt(data.id), data.email, data.github)
             engineers.push(newEngineer)
         } else if ((data.role).includes("Intern")){
-            const newIntern = new Intern(data.name, data.id, data.email, data.school)
+            const newIntern = new Intern(data.name, parseInt(data.id), data.email, data.school)
             interns.push(newIntern)
         }
         if (data.continue === true){
             init();
         }
-        console.log(managers);
-        console.log(engineers);
-        console.log(interns);
+        // console.log(managers);
+        // console.log(engineers);
+        // console.log(interns);
+
+        fs.writeFile('index.html', generateHtml(managers, engineers, interns), (err) => 
+        err ? console.log(err) : console.log("HTML file write successful"));
     });
 }
 
