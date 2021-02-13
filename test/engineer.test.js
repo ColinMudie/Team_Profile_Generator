@@ -11,13 +11,13 @@ describe("Engineer Class", () => {
         })
 
         it ("should throw an error if provided no arguments", () => {
-            const testEngineer = new Engineer();
-            expect(testEngineer).toThrow();
+            const testEngineer = () => new Engineer();
+            expect(testEngineer).toThrow(Error("must provide valid arguments"));
         });
 
         it ("should throw an error if 'github' is not a string", () => {
-            const testEngineer = new Engineer('Colin', 1, 'csmudie1@gmail.com', 0);
-            expect(testEngineer).toThrow(Error);
+            const testEngineer = () => new Engineer('Colin', 1, 'csmudie1@gmail.com', 0);
+            expect(testEngineer).toThrow(Error("Expected parameter 'github' to be a string"));
         });
     });
 
@@ -31,7 +31,7 @@ describe("Engineer Class", () => {
     describe("getGithub", () => {
         it('should return the objects "github"', () => {
             const testEngineer = new Engineer('Colin', 1, 'csmudie1@gmail.com', 'ColinMudie');
-            expect(testEngineer.getName()).toEqual('ColinMudie');
+            expect(testEngineer.getGithub()).toEqual('https://github.com/ColinMudie/');
         });
     });
 });
