@@ -90,7 +90,7 @@ function init(){
         // console.log(managers);
         // console.log(engineers);
         // console.log(interns);
-        fs.writeFile('index.html', generateHtml(managers, engineers, interns), (err) => 
+        fs.writeFile('./dist/index.html', generateHtml(managers, engineers, interns), (err) => 
         err ? console.log(err) : console.log("HTML file write successful"));
     });
 }

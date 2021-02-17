@@ -21,8 +21,8 @@ function generateManagers(managers) {
             </div>
             `)
         });
-        return managerCard
     }
+    return managerCard
 }
 
 function generateEngineers(engineers) {
@@ -41,8 +41,8 @@ function generateEngineers(engineers) {
             </div>
             `)
         });
-        return engineerCard
     }
+    return engineerCard
 }
 
 function generateInterns(interns) {
@@ -61,8 +61,8 @@ function generateInterns(interns) {
             </div>
             `)
         });
-        return internsCard
     }
+    return internsCard
 }
 
 function generateHtml(managers, engineers, interns) {
@@ -101,3 +101,4 @@ function generateHtml(managers, engineers, interns) {
 }
 
 module.exports = generateHtml;
+
