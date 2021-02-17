@@ -1,174 +1,132 @@
-# 10 Object-Oriented Programming: Team Profile Generator
+# Team Profile Generator
 
-## Your Task
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-Your task is to build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. Testing is key to making code maintainable, so you’ll also write a unit test for every part of your code and ensure that it passes each test.
+## Description
+This program is designed as a way to easily enter information for a manager's employment team. Using the terminal in node.js, the information on each of the employees is gathered with the help from the npm "inquirer". This data is then compiled into an HTML5 file titled "index.html" and is saved inside the [dist](./dist) folder.
 
-Because this application won’t be deployed, you’ll need to provide a link to a walkthrough video that demonstrates its functionality and all of the tests passing. You’ll need to submit a link to the video AND add it to the readme of your project.
+## Table of Contents
 
-> **Note**: There is no starter code for this assignment.
+* [User Story](#user-story)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Features](#features)
+* [Tests](#tests)
+* [Questions](#questions)
+* [License](#license)
 
 ## User Story
-
 ```md
 AS A manager
-I WANT to generate a webpage that displays my team's basic info
+I WANT to generate a webpage that displays my team's basic information
 SO THAT I have quick access to their emails and GitHub profiles
 ```
 
-## Acceptance Criteria
+## Installation
+- Install [node.js](https://nodejs.org/en/) if you do not already have it.
+- in the command terminal type in "npm install"
+- you are now ready to run the program!
 
-```md
-   GIVEN a command-line application that accepts user input
-[x] WHEN I am prompted for my team members and their information
-     THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-[x] WHEN I click on an email address in the HTML
-     THEN my default email program opens and populates the TO field of the email with the address
-[x] WHEN I click on the GitHub username
-     THEN that GitHub profile opens in a new tab
-[x] WHEN I start the application
-     THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-[x] WHEN I enter the team manager’s name, employee ID, email address, and office number
-     THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-[x] WHEN I select the engineer option
-     THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-[x] WHEN I select the intern option
-     THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-[x] WHEN I decide to finish building my team
-     THEN I exit the application, and the HTML is generated
-```
+## Usage
+- After the user successfully downloading the prerequisites in the [Installation](#installation) secion, start the program by entering "node index.js" in our terminal
+- The user will then be presented with a serious of questions about an employee, with the last question being "Do you have another employee to add?". 
+    - Upon answering yes, the User will be sent back to the firsdt question to enter information for another employee.
+    - Upon answering no, the program will end and an index.html file will be created in the [dist](./dist) folder.
+- Walkthrough Example:  
+![Team_Profile_Generator_testrun](./Assets/Team_Profile_Generator_testrun.gif)
+- Finished HTML File:  
+![Team_Profile_Generator_HTML_Example](./Assets/Team_Profile_Generator_HTML_Example.png)
 
-## Mock-Up
+## Features
+- [node.js](https://nodejs.org/en/)
+- [Inquirer](https://www.npmjs.com/package/inquirer)
+- HTML5
+- CSS
+- [Jest](https://jestjs.io/) (test suite)
 
-The following image shows a mock-up of the generated HTML’s appearance and functionality:
+## Tests
+Jest is the test suite that was used for this program.  
+Instructions to download and use Jest:
+- Install jest by entering "npm install --save-dev jest" into the terminal.
+- Run the test by entering "npm test -- --verbose" into the terminal.
+- There are 4 test suites:
+    - [Employee Class](./test/employee.test.js)
+        - Initialization:
+            - should create an object with name, id, and email, if provided valid arguments
+            - should throw an error if provided no arguments
+            - should throw an error if 'name' is not a string 
+            - should throw an error if 'name' contains a number 
+            - should throw an error if 'id' is not an integer 
+            - should throw an error if 'id' is a negative integer
+            - should throw an error if 'email' is not a string 
+            - should throw an error if 'email' is not a valid email address
+        - getName fucntion:
+            - should return the objects "name"
+        - getId function:
+            - should return the objects "id"
+        - getEmail function:
+            - should return the objects "email"
+        - getRole function:
+            - should return the objects role as "Employee"
 
-![HTML webpage titled “My Team” features five boxes listing employee names, titles, and other key info.](./Assets/10-object-oriented-programming-homework-demo.png)
+    - [Manager Class](./test/manager.test.js) (extension of Employee)
+        - Initialization:
+            - should create an object with name, id, email, and officeNumber if provided valid arguments 
+            - should throw an error if provided no arguments 
+            - should throw an error if 'officeNumber' is not an Integer
+            - should throw an error if 'officeNumber' is less than or equal to 0. 
+        - getRole function:
+            - should return the objects role as "Manager"
+        - getOfficeNumber function:
+            - should return the objects "officeNumber"
 
-The styling in the image is just an example, so feel free to add your own.
+    - [Engineer Class](./test/engineer.test.js) (extension of Employee)
+        - Initialization
+            - should create an object with name, id, email, and github if provided valid arguments
+            - should throw an error if provided no arguments 
+            - should throw an error if 'github' is not a string 
+        - getRole function:
+            - should return the objects role as Engineer
+        - getGithub function:
+            - should return the objects "github" 
 
-## Getting Started
-
-This homework will combine many of the skills we've covered so far. In addition to the User Story and Acceptance Criteria, we’ve provided some guidelines to help get started.
-
-Your application should use [Jest](https://www.npmjs.com/package/jest) for running the unit tests and [Inquirer](https://www.npmjs.com/package/inquirer) for collecting input from the user. The application will be invoked by using the following command:
-
-```bash
-node index.js
-```
-
-It is recommended that you start with a directory structure that looks like the following example:
-
-```md
-__tests__/			// jest tests
-  Employee.test.js
-  Engineer.test.js
-  Intern.test.js
-  Manager.test.js
-dist/               // rendered output (HTML) and CSS style sheet
-lib/				// classes
-src/				// template helper code
-index.js			// runs the application
-```
-
-The application must include `Employee`, `Manager`, `Engineer`, and `Intern` classes. The tests for these classes (in the `_tests_` directory) must ALL pass.
-
-The first class is an `Employee` parent class with the following properties and methods:
-
-* `name`
-
-* `id`
-
-* `email`
-
-* `getName()`
-
-* `getId()`
-
-* `getEmail()`
-
-* `getRole()`&mdash;returns `'Employee'`
-
-The other three classes will extend `Employee`.
-
-In addition to `Employee`'s properties and methods, `Manager` will also have the following:
-
-* `officeNumber`
-
-* `getRole()`&mdash;overridden to return `'Manager'`
-
-In addition to `Employee`'s properties and methods, `Engineer` will also have the following:
-
-* `github`&mdash;GitHub username
-
-* `getGithub()`
-
-* `getRole()`&mdash;overridden to return `'Engineer'`
-
-In addition to `Employee`'s properties and methods, `Intern` will also have the following:
-
-* `school`
-
-* `getSchool()`
-
-* `getRole()`&mdash;overridden to return `'Intern'`
-
-Finally, although it’s not a requirement, consider adding validation to ensure that user input is in the proper format.
-
-## Grading Requirements
-
-This homework is graded based on the following criteria: 
-
-### Deliverables: 15%
-
-* A sample HTML file generated using the application must be submitted.
-
-* Your GitHub repository containing your application code.
+    - [Intern Class](./test/intern.test.js) (extension of Employee)
+        - Initialization
+            - Should create an object with name, id, email, and school if provided valid arguments
+            - should throw an error if provided no arguments 
+            - should throw an error if 'school' is not a string
+        - getRole function:
+            -  should return the objects role as Intern
+        - getSchool function:
+            -  should return the objects "school"  
+- Example Jest Test:
+![Jest Testrun](./Assets/npm_jest_testrun.gif)
 
 
-### Walkthrough Video: 32%
-
-* A walkthrough video that demonstrates the functionality of the Team Profile Generator and passing tests must be submitted, and a link to the video should be included in your README file.
-
-* The walkthrough video must show all four tests passing from the command line.
-
-* The walkthrough video must demonstrate how a user would invoke the application from the command line.
-
-* The walkthrough video must demonstrate how a user would enter responses to all of the prompts in the application.
-
-* The walkthrough video must demonstrate a generated HTML file that matches the user input.
+## Questions
+Github: [ColinMudie](https://github.com/ColinMudie/)  
+Email: [csmudie1@gmail.com](csmudie1@gmail.com)
 
 
-### Technical Acceptance Criteria: 40%
 
-* Satisfies all of the preceding acceptance criteria plus the following:
+## License
+MIT License
+Copyright (c) [2021] [Colin Mudie]
 
-	* Uses the [Inquirer package](https://www.npmjs.com/package/inquirer).
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-	* Uses the [Jest package](https://www.npmjs.com/package/jest) for a suite of unit tests.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-  * The application must have `Employee`, `Manager`, `Engineer`, and `Intern` classes.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains a high-quality readme with description and a link to a walkthrough video.
-
-## Review
-
-You are required to submit the following for review:
-
-* A walkthrough video that demonstrates the functionality of the application and passing tests.
-
-* A sample HTML file generated using your application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
----
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
